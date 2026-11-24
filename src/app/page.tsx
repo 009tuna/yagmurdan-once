@@ -5,6 +5,7 @@ import { VoiceCaptionBar } from "@/components/shell/VoiceCaptionBar";
 import { ReferenceDrawer } from "@/components/shell/ReferenceDrawer";
 import { HeroStage } from "@/components/stages/HeroStage";
 import { ProblemSection } from "@/components/stages/ProblemSection";
+import { ComparisonSection } from "@/components/stages/ComparisonSection";
 import { StormRadarAct } from "@/components/stages/StormRadarAct";
 import { AkaySectionAct } from "@/components/stages/AkaySectionAct";
 import { ArchitectureSection } from "@/components/stages/ArchitectureSection";
@@ -22,6 +23,7 @@ export default function HomePage() {
         <main>
           <HeroStage />
           <ProblemSection />
+          <ComparisonSection />
           <StormRadarAct />
           <AkaySectionAct />
           <ArchitectureSection />

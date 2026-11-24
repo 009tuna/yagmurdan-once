@@ -153,7 +153,7 @@ export function PilotEndingSection() {
         </div>
       </section>
 
-      {/* Screen 2: 7 KPIs, Institutional Governance & Footer (fits cleanly within final 100svh) */}
+      {/* Screen 2: KPIs, Institutional Governance & Footer (fits cleanly within final 100svh) */}
       <section
         ref={govRef}
         id="kurumsal"
@@ -161,26 +161,38 @@ export function PilotEndingSection() {
         className="deck-slide relative isolate overflow-hidden scroll-mt-[var(--head)] justify-between bg-[var(--paper)]"
       >
         <div className="mx-auto grid w-full max-w-[1680px] grid-cols-1 gap-8 lg:grid-cols-[0.95fr_1.25fr] lg:gap-10 xl:gap-14">
-          {/* 7 Measurable KPIs */}
+          {/* Measurable KPIs (no numeric targets) */}
           <div className="flex flex-col justify-between">
             <div>
               <span className="eyebrow-label text-[var(--pine)]">
-                Ölçülebilir Pilot Başarı Kriterleri (s. 10–11)
+                Ölçülebilir Pilot Başarı Kriterleri
               </span>
               <h3 className="font-display mt-1.5 text-[clamp(22px,min(2.7vw,3.9svh),38px)] font-normal leading-tight tracking-[-0.04em] text-[var(--ink)]">
-                Başarı tek metrikle değil, yedi eşikle ölçülür.
+                Başarı tek metrikle değil, birden çok ölçütle değerlendirilir.
               </h3>
 
               <dl className="mt-2.5 xl:mt-3 divide-y divide-[var(--hairline)] border-y border-[var(--hairline)]">
                 {KPI_TARGETS.map((item) => (
                   <div
                     key={item.metric}
-                    className="flex items-baseline justify-between gap-4 py-1 xl:py-1.5 text-[11.5px] xl:text-[12px]"
+                    className="flex items-start gap-2.5 py-1 xl:py-1.5 text-[11.5px] xl:text-[12px]"
                   >
-                    <dt className="text-[var(--ink)]">{item.metric}</dt>
-                    <dd className="font-mono-num shrink-0 font-semibold text-[var(--pine)]">
-                      {item.target}
-                    </dd>
+                    <span
+                      aria-hidden="true"
+                      className={`mt-[0.45em] inline-block h-1.5 w-1.5 shrink-0 rounded-full ${
+                        "isNew" in item ? "bg-[#2f7fa8]" : "bg-[var(--pine)]"
+                      }`}
+                    />
+                    <div>
+                      <dt className={"isNew" in item ? "font-semibold text-[#1f5f80]" : "text-[var(--ink)]"}>
+                        {item.metric}
+                      </dt>
+                      {"note" in item ? (
+                        <dd className="mt-0.5 text-[10.5px] xl:text-[11px] leading-snug text-[var(--ink-muted)]">
+                          {item.note}
+                        </dd>
+                      ) : null}
+                    </div>
                   </div>
                 ))}
               </dl>

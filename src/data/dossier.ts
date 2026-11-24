@@ -449,13 +449,18 @@ export const JURY_PITCH_CHAPTERS = [
 ] as const;
 
 export const KPI_TARGETS = [
-  { metric: "Ortalama müdahale süresinde azalma", target: "≥ %50" },
-  { metric: "Kritik noktaların zamanında kapsanması (Top-K yakalama)", target: "≥ %80" },
-  { metric: "Gereksiz ekip bekleme süresinde azalma", target: "≥ %30" },
-  { metric: "Kaçırılan su baskını sayısında (False Negative) azalma", target: "≥ %30" },
-  { metric: "Su baskını kaynaklı alt geçit kapanma süresinde azalma", target: "≥ %25" },
-  { metric: "Yanlış alarm kaynaklı gereksiz sevklerde (False Positive) azalma", target: "≥ %25" },
-  { metric: "Risk değerlendirme ve konuşlandırma atama süresi", target: "≤ 2 dakika" },
+  { metric: "Ortalama müdahale süresinde azalma" },
+  { metric: "Kritik noktaların zamanında kapsanması (Top-K yakalama)" },
+  { metric: "Gereksiz ekip bekleme süresinde azalma" },
+  { metric: "Kaçırılan su baskını sayısında (False Negative) azalma" },
+  { metric: "Su baskını kaynaklı alt geçit kapanma süresinde azalma" },
+  { metric: "Yanlış alarm kaynaklı gereksiz sevklerde (False Positive) azalma" },
+  { metric: "Risk değerlendirme ve konuşlandırma atama süresi" },
+  {
+    metric: "Tahliye edilen yağmur suyunun geri kazanımı",
+    note: "Pompalanan suyun kanalizasyon yerine depolama, sulama veya yeşil alana yönlendirilen payı (m³)",
+    isNew: true,
+  },
 ] as const;
 
 export const GOVERNANCE_ROLES = [
@@ -493,7 +498,8 @@ export const GOVERNANCE_ROLES = [
 
 export const CHAPTER_INDEX = [
   { href: "#giris", label: "Açılış · 16.30 Çankaya" },
-  { href: "#problem", label: "Problem ve Müdahale Boşluğu" },
+  { href: "#problem", label: "Problem Tanımı" },
+  { href: "#karsilastirma", label: "Proje Özeti ve Karşılaştırma" },
   { href: "#hava", label: "I · Gökyüzü ve 3B Radar" },
   { href: "#kesit", label: "II · Akay Kesiti ve Wilo DDI" },
   { href: "#mimari", label: "3 Seviyeli Veri ve Donanım Uyumu" },

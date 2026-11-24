@@ -127,36 +127,51 @@ export function HeroStage() {
         />
 
         <div className="relative z-10 mx-auto flex h-full w-full max-w-[1680px] flex-col justify-between px-[var(--edge)] pb-[clamp(16px,3.2svh,32px)] pt-[calc(var(--head)+clamp(12px,3.2svh,36px))]">
-          <div />
-
           <div
             ref={typeRef}
-            className="max-w-[760px] will-change-transform"
+            className="flex min-h-0 flex-1 max-w-[860px] flex-col justify-between gap-[clamp(14px,3svh,40px)] will-change-transform"
           >
-            <span className="eyebrow-label inline-flex items-center gap-2 text-[#eef1e5]/90">
-              <span
-                className="inline-block h-2 w-2 rounded-full bg-[#ff8955]"
-                aria-hidden="true"
-              />
-              <span>16.30</span>
-              <span className="opacity-45">/</span>
-              <span>Çankaya · MGM Turuncu Uyarı</span>
-            </span>
+            {/* Project title: clearly stated on the first screen */}
+            <div className="border-l-2 border-[#ff8955] pl-[clamp(12px,1.4vw,20px)]">
+              <span className="eyebrow-label block text-[#eef1e5]/80">
+                Wilo × imece Water AI Hackathon 2026 · Proje
+              </span>
+              <h1
+                id="hero-title"
+                className="font-display mt-[clamp(4px,1svh,10px)] text-[clamp(38px,min(5.6vw,8.6svh),96px)] font-normal leading-[0.92] tracking-[-0.045em] text-[#fffdf4]"
+              >
+                Yağmurdan Önce
+              </h1>
+              <p className="mt-[clamp(4px,0.9svh,10px)] text-[clamp(17px,min(1.9vw,3svh),30px)] font-medium leading-tight tracking-[-0.02em] text-[#fffdf4]">
+                Akıllı Mobil Pompa Konuşlandırma Sistemi
+              </p>
+              <p className="mt-[clamp(6px,1.2svh,12px)] max-w-[58ch] text-[clamp(13px,1.05vw,16px)] leading-[1.45] text-[#eef1e5]/85">
+                Sağanak başlamadan riskli alt geçitleri öngören; sabit ve mobil
+                pompaları birlikte yöneten yapay zekâ destekli karar sistemi.
+              </p>
+            </div>
 
-            <h1
-              id="hero-title"
-              className="font-display mt-[clamp(10px,2svh,20px)] text-[clamp(52px,min(8.8vw,13.5svh),148px)] font-normal leading-[0.86] tracking-[-0.055em] text-[#fffdf4]"
-            >
-              Henüz
-              <br />
-              <em className="font-normal italic">yağmadı.</em>
-            </h1>
+            <div>
+              <span className="eyebrow-label inline-flex items-center gap-2 text-[#eef1e5]/90">
+                <span
+                  className="inline-block h-2 w-2 rounded-full bg-[#ff8955]"
+                  aria-hidden="true"
+                />
+                <span>16.30</span>
+                <span className="opacity-45">/</span>
+                <span>Çankaya · MGM Turuncu Uyarı</span>
+              </span>
 
-            <p className="mt-[clamp(12px,2.2svh,24px)] max-w-[46ch] text-[clamp(15px,1.32vw,21px)] leading-[1.48] text-[#eef1e5]/92">
-              Yarım saat sonra sağanak bekleniyor.
-              <br />
-              On iki aday alt geçit, altı mobil pompa. İlk ekip nereye?
-            </p>
+              <p className="font-display mt-[clamp(6px,1.4svh,14px)] text-[clamp(36px,min(5vw,8svh),88px)] font-normal leading-[0.9] tracking-[-0.05em] text-[#fffdf4]">
+                Henüz <em className="font-normal italic">yağmadı.</em>
+              </p>
+
+              <p className="mt-[clamp(8px,1.6svh,18px)] max-w-[46ch] text-[clamp(14px,1.2vw,19px)] leading-[1.45] text-[#eef1e5]/92">
+                Yarım saat sonra sağanak bekleniyor.
+                <br />
+                On iki aday alt geçit, altı mobil pompa. İlk ekip nereye?
+              </p>
+            </div>
           </div>
 
           <div className="flex flex-wrap items-end justify-between gap-6 border-t border-white/20 pt-5 text-[#fff9e9]">
@@ -174,10 +189,8 @@ export function HeroStage() {
             </button>
 
             <div className="eyebrow-label text-right text-[10px] text-[#e3ebe4]/80">
-              <span className="block">WİLO × İMECE WATER AI HACKATHON 2026</span>
-              <span className="block opacity-75">
-                SABİT VE MOBİL POMPA KARAR DESTEK SUNUMU
-              </span>
+              <span className="block">SABİT VE MOBİL POMPA</span>
+              <span className="block opacity-75">KARAR DESTEK SUNUMU</span>
             </div>
           </div>
         </div>
