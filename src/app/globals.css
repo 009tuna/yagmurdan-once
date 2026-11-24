@@ -1,26 +1,376 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #f4f3ed;
+  --paper-subtle: #e9ebe2;
+  --ink: #132825;
+  --ink-muted: #465852;
+  --pine: #236a52;
+  --signal: #be4528;
+  --night: #10231f;
+  --night-ink: #eef1e5;
+  --night-muted: #b6c7bb;
+  --hairline: #c5ccc0;
+  --hairline-dark: #28423b;
+  --head: 62px;
+  --edge: clamp(20px, 4.5vw, 88px);
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-spectral), Georgia, serif;
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scrollbar-gutter: stable;
+  scrollbar-color: #8b998c #e3e5dd;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  overflow-x: clip;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.font-display {
+  font-family: var(--font-spectral), Georgia, serif;
+}
+
+.font-mono-num {
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.eyebrow-label {
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+.tactile-btn {
+  transition:
+    transform 160ms var(--ease-out),
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    opacity 180ms ease;
+}
+
+.tactile-btn:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tactile-hover:hover {
+    transform: translateY(-1px);
+  }
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+
+/* Editorial full-viewport presentation slide: 100svh centered on desktop, natural flow on mobile */
+.deck-slide {
+  padding-left: var(--edge);
+  padding-right: var(--edge);
+  padding-top: 52px;
+  padding-bottom: 52px;
+}
+
+@media (min-width: 1024px) and (min-height: 600px) {
+  .deck-slide {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: calc(var(--head) + clamp(10px, 1.8svh, 24px));
+    padding-bottom: clamp(10px, 1.8svh, 24px);
+  }
+}
+
+/* Reclaim top chrome height on standard 1080p@125% or 768p laptops */
+@media (max-height: 780px) and (min-width: 781px) {
+  :root {
+    --head: 52px;
+  }
+  .stage-pad {
+    padding-top: calc(var(--head) + 10px) !important;
+    padding-bottom: 10px !important;
+  }
+  .stage-head {
+    padding-bottom: 6px !important;
+  }
+  .stage-h2 {
+    font-size: clamp(26px, min(3.2vw, 5svh), 46px) !important;
+    margin-top: 4px !important;
+  }
+  .stage-body {
+    font-size: clamp(12.5px, 1.7svh, 14.5px) !important;
+    line-height: 1.45 !important;
+    margin-top: 6px !important;
+  }
+  .stage-sim {
+    margin-top: 8px !important;
+    padding: 10px 12px !important;
+  }
+  .stage-figure {
+    height: calc(100svh - var(--head) - 72px) !important;
+    max-height: 620px !important;
+  }
+}
+
+/* Compact 150%-scaled laptops (e.g. 1920x1080 @ 150% -> ~1280x600..640 CSS px) */
+@media (max-height: 670px) and (min-width: 781px) {
+  :root {
+    --head: 48px;
+  }
+  .deck-slide {
+    padding-top: calc(var(--head) + 8px);
+    padding-bottom: 8px;
+  }
+  .stage-pad {
+    padding-top: calc(var(--head) + 8px) !important;
+    padding-bottom: 8px !important;
+  }
+  .stage-head {
+    padding-bottom: 4px !important;
+  }
+  .stage-h2 {
+    font-size: clamp(22px, min(2.8vw, 4.3svh), 36px) !important;
+    margin-top: 3px !important;
+  }
+  .stage-body {
+    font-size: 12.5px !important;
+    line-height: 1.4 !important;
+    margin-top: 4px !important;
+  }
+  .stage-sim {
+    margin-top: 6px !important;
+    padding: 8px 10px !important;
+  }
+  .stage-figure {
+    height: calc(100svh - var(--head) - 56px) !important;
+    max-height: 520px !important;
+  }
+  .ai-head {
+    padding-bottom: 8px !important;
+  }
+  .ai-body {
+    margin-top: 10px !important;
+  }
+  .ai-card {
+    padding: 8px 10px !important;
+  }
+  .ai-card ul {
+    margin-top: 4px !important;
+    font-size: 11px !important;
+    line-height: 1.26 !important;
+  }
+  .ai-card > p {
+    margin-top: 4px !important;
+    padding-top: 4px !important;
+    font-size: 10px !important;
+  }
+  .xai-card {
+    padding: 10px 14px !important;
+  }
+  .pilot-copy {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
+  #pilot-heading {
+    font-size: 28px !important;
+    margin-top: 4px !important;
+  }
+  .pilot-lead {
+    margin-top: 6px !important;
+    font-size: 12px !important;
+    line-height: 1.36 !important;
+  }
+  .pilot-kpi {
+    margin-top: 8px !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+  .pilot-methods {
+    margin-top: 8px !important;
+  }
+  .pilot-card {
+    padding: 6px 8px !important;
+  }
+  .pilot-card p {
+    font-size: 10.5px !important;
+    line-height: 1.24 !important;
+  }
+}
+
+/* Range slider precision styling */
+input[type="range"].telemetry-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"].telemetry-slider::-webkit-slider-runnable-track {
+  height: 2px;
+  background: var(--hairline-dark);
+}
+
+input[type="range"].telemetry-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  margin-top: -6px;
+  background: var(--signal);
+  border: 2px solid var(--night-ink);
+  border-radius: 9999px;
+  transition: transform 140ms var(--ease-out);
+}
+
+input[type="range"].telemetry-slider::-webkit-slider-thumb:active {
+  transform: scale(1.15);
+}
+
+input[type="range"].telemetry-slider::-moz-range-track {
+  height: 2px;
+  background: var(--hairline-dark);
+}
+
+input[type="range"].telemetry-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: var(--signal);
+  border: 2px solid var(--night-ink);
+  border-radius: 9999px;
+}
+
+@media (max-width: 780px) {
+  :root {
+    --head: 54px;
+    --edge: clamp(16px, 4.4vw, 28px);
+  }
+}
+
+/* Portrait mobile: keep Akay DDI interactive stack cleanly inside 100svh */
+@media (max-width: 1023px) {
+  #kesit .stage-figure {
+    height: 26svh !important;
+    min-height: 150px !important;
+  }
+  #kesit .stage-sim {
+    margin-top: 8px !important;
+    padding: 8px 10px !important;
+  }
+}
+
+/* Compact portrait phones (e.g. 375x667) prevent sticky stage clipping */
+@media (max-width: 1023px) and (max-height: 760px) {
+  :root {
+    --head: 48px;
+  }
+  .stage-pad {
+    padding-top: calc(var(--head) + 6px) !important;
+    padding-bottom: 6px !important;
+  }
+  .stage-head {
+    padding-bottom: 4px !important;
+  }
+  .stage-grid {
+    gap: 8px !important;
+    padding-top: 6px !important;
+  }
+  .stage-figure {
+    height: 24svh !important;
+    min-height: 135px !important;
+  }
+  #kesit .stage-figure {
+    height: 20svh !important;
+    min-height: 116px !important;
+  }
+  .stage-h2 {
+    font-size: 22px !important;
+    margin-top: 2px !important;
+  }
+  .stage-body {
+    font-size: 12px !important;
+    line-height: 1.32 !important;
+    margin-top: 4px !important;
+  }
+  .stage-sim {
+    margin-top: 4px !important;
+    padding: 6px 8px !important;
+  }
+}
+
+/* Landscape mobile viewports (e.g. 740x360) switch pinned stages cleanly side-by-side */
+@media (orientation: landscape) and (max-height: 500px) {
+  :root {
+    --head: 42px;
+  }
+  .stage-pad {
+    padding-top: calc(var(--head) + 6px) !important;
+    padding-bottom: 6px !important;
+  }
+  .stage-head {
+    padding-bottom: 4px !important;
+  }
+  .stage-grid {
+    grid-template-columns: 1fr 1.15fr !important;
+    align-items: center !important;
+    gap: 14px !important;
+    padding-top: 6px !important;
+  }
+  .stage-copy {
+    order: 1 !important;
+  }
+  .stage-figure {
+    order: 2 !important;
+    height: calc(100svh - var(--head) - 46px) !important;
+    min-height: 0 !important;
+  }
+  .stage-h2 {
+    font-size: 24px !important;
+    margin-top: 4px !important;
+  }
+  .stage-body {
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+    margin-top: 4px !important;
+  }
+  .stage-sim {
+    margin-top: 6px !important;
+    padding: 8px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }
