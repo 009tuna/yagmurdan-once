@@ -11,17 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     if: >-
       github.event_name == 'workflow_dispatch' ||
-      github.actor != '009tuna' ||
       (github.event.head_commit.author.username != '009tuna' &&
        github.event.head_commit.author.email != 'tunahan.81.jb@gmail.com')
     steps:
       - name: Trigger Vercel Deploy Hook
         env:
           DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
           if [ -z "$DEPLOY_HOOK" ]; then
-            echo "::error::VERCEL_DEPLOY_HOOK secret is missing. Add it under Settings -> Secrets and variables -> Actions."
-            exit 1
+            if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+              echo "::error::VERCEL_DEPLOY_HOOK secret is missing. Add it under Settings -> Secrets and variables -> Actions."
+              exit 1
+            fi
+            echo "::warning::VERCEL_DEPLOY_HOOK secret is not configured; skipping fallback deploy hook. Add Settings -> Secrets and variables -> Actions -> VERCEL_DEPLOY_HOOK for non-owner commit authors."
+            exit 0
           fi
           HTTP_CODE=$(curl -sS -o /tmp/vercel_hook.json -w "%{http_code}" -X POST "$DEPLOY_HOOK")
           cat /tmp/vercel_hook.json
